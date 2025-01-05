@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="74e14ed8-7713-4cad-83eb-f87feb20f369" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="cicd-auto-connected-applicationFlow" doc:id="6f596f50-fcff-43e6-b76b-4f0bf36b7780" >
+		<http:listener doc:name="Listener" doc:id="a871f64f-a548-409b-a048-c1066389b59e" config-ref="HTTP_Listener_config" path="/cicd"/>
+		<logger level="INFO" doc:name="Logger" doc:id="ed92fb2f-b173-401a-b02c-52f2502ef685" message="flow start"/>
+		<ee:transform doc:name="Transform Message" doc:id="81dc2d10-4ebf-4018-8cae-bb9f5f0f31b7" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+"message": "CICD Auto depolyment using github action configured successfully"
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="dc32af06-8e9f-4481-a0c9-d77595623d57" message="#[payload]"/>
+	</flow>
+</mule>
