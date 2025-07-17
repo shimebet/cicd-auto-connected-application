@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
-<settings>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
 
   <pluginGroups>
     <pluginGroup>org.mule.tools</pluginGroup>
@@ -8,8 +10,8 @@
   <servers>
     <server>
       <id>Repository</id>
-      <username>~~~Client~~~</username>
-      <password>${client.id}~?~${client.secret}</password>
+      <username>${client.id}</username>
+      <password>${client.secret}</password>
     </server>
   </servers>
 
