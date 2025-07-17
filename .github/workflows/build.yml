@@ -29,9 +29,18 @@ jobs:
           mvn deploy --settings .maven/settings.xml -DskipMunitTests \
           -Dclient.id="${{ secrets.CONNECTED_CLIENT_ID }}" \
           -Dclient.secret="${{ secrets.CONNECTED_CLIENT_SECRET }}"
+      - name: Build Mule Application
+          run: |
+            mvn clean package --settings .maven/settings.xml -DskipMunitTests
+
       - name: Deploy to CloudHub 2.0
         run: |
           mvn mule:deploy --settings .maven/settings.xml -DskipMunitTests \
           -Dclient.id="${{ secrets.CONNECTED_CLIENT_ID }}" \
           -Dclient.secret="${{ secrets.CONNECTED_CLIENT_SECRET }}"
+      - name: Deploy with Debug
+         run: |
+           mvn mule:deploy -X --settings .maven/settings.xml -DskipMunitTests \
+           -Dclient.id="${{ secrets.CONNECTED_CLIENT_ID }}" \
+           -Dclient.secret="${{ secrets.CONNECTED_CLIENT_SECRET }}"
 
