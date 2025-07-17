@@ -41,7 +41,6 @@ jobs:
 
       - name: Deploy to CloudHub 2.0
         run: |
-          mvn mule:deploy -X --settings .maven/settings.xml -DskipMunitTests \
-          -Dclient.id="${{ secrets.Shime4321 }}" \
-          -Dclient.secret="${{ secrets.Shime@4321 }}"
-
+          mvn mule:deploy --settings .maven/settings.xml -DskipMunitTests \
+          -Dclient.id="${{ secrets.CONNECTED_CLIENT_ID }}" \
+          -Dclient.secret="${{ secrets.CONNECTED_CLIENT_SECRET }}"
