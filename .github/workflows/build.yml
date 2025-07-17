@@ -3,15 +3,16 @@ name: Publish to Exchange & Deploy to CH2.0
 on:
   push:
     branches: [ main ]
-    
-jobs:         
+
+jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout this repo
         uses: actions/checkout@v4
 
-      - name: Cache dependencies
+      - name: Cache Maven dependencies
         uses: actions/cache@v4
         with:
           path: ~/.m2/repository
@@ -23,14 +24,23 @@ jobs:
         with:
           distribution: "zulu"
           java-version: 17
-      
-      - name: Publish to Exchange
+
+      - name: Build Mule Application
+        run: |
+          mvn clean package --settings .maven/settings.xml -DskipMunitTests
+
+      - name: List target folder contents
+        run: |
+          ls -lah target
+
+      - name: Publish to Anypoint Exchange
         run: |
           mvn deploy --settings .maven/settings.xml -DskipMunitTests \
           -Dclient.id="${{ secrets.CONNECTED_CLIENT_ID }}" \
           -Dclient.secret="${{ secrets.CONNECTED_CLIENT_SECRET }}"
+
       - name: Deploy to CloudHub 2.0
         run: |
-          mvn deploy --settings .maven/settings.xml -DskipMunitTests -DmuleDeploy \
+          mvn mule:deploy --settings .maven/settings.xml -DskipMunitTests \
           -Dclient.id="${{ secrets.CONNECTED_CLIENT_ID }}" \
-          -Dclient.secret="${{ secrets.CONNECTED_CLIENT_SECRET }}" 
+          -Dclient.secret="${{ secrets.CONNECTED_CLIENT_SECRET }}"
