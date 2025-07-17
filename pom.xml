@@ -4,7 +4,7 @@
 
 	<groupId>f516f5aa-b80f-4e8f-bcf1-71386ea6abd1</groupId>
 	<artifactId>cicd-auto-connected-application</artifactId>
-	<version>1.3.0</version>
+	<version>1.4.0</version>
 	<packaging>mule-application</packaging>
 
 	<name>cicd-auto-connected-application</name>
@@ -12,7 +12,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<app.runtime>4.9.7-23</app.runtime>
+		<app.runtime>4.9.7</app.runtime>
 		<mule.maven.plugin.version>4.3.0</mule.maven.plugin.version>
 	</properties>
 
