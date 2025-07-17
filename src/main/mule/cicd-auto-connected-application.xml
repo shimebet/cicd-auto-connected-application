@@ -17,7 +17,6 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 output application/json
 ---
 {
-"statuscode": "201",
 "status": "success",
 "message": "CICD Auto depolyment using github action configured successfully",
 "TimeTake": now()
