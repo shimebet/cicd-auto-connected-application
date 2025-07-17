@@ -36,7 +36,9 @@
 						<provider>MC</provider>
 						<environment>Sandbox</environment>
 						<target>Cloudhub-US-East-2</target>
-						<server>Repository</server>
+						<clientId>${client.id}</clientId>
+                        <clientSecret>${client.secret}</clientSecret>
+
 						<applicationName>${project.artifactId}</applicationName>
 						<releaseChannel>Edge</releaseChannel>
 						<muleVersion>4.8.1</muleVersion>
